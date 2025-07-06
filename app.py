@@ -94,6 +94,7 @@ form_html = f"""
     }}
     .download-button {{
       display: inline-block;
+      border-radius:5px;
       background-color: #28a745;
       color: white;
       padding: 10px 15px;
@@ -110,7 +111,7 @@ form_html = f"""
   <h1>🧾 Weekly Client Dashboard</h1>
 
   <a href="https://docs.google.com/spreadsheets/d/{SHEET_ID}/export?format=xlsx" target="_blank" class="download-button">
-    📥 Download Current Sheet
+   Download Current Sheet
   </a>
 
   <form method="POST">
@@ -121,22 +122,16 @@ form_html = f"""
     <input name="tenant_code" required>
 
     <label>Golive AM</label>
-    <input name="golive_am">
+    <input name="golive_am" required>
 
     <label>Go Live Mgr</label>
-    <input name="golive_mgr">
+    <input name="golive_mgr" required>
 
     <label>Status</label>
-    <select name="status" required>
-      <option value="">-- Select Status --</option>
-      <option>Pending</option>
-      <option>In Progress</option>
-      <option>Live</option>
-      <option>Blocked</option>
-    </select>
-
+    <input name="Status" required>
+   
     <label>Dashboard Status</label>
-    <input name="dashboard_status">
+    <input name="dashboard_status" required>
 
     <label>Remarks</label>
     <textarea name="remarks" rows="3"></textarea>
