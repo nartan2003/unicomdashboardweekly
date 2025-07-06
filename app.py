@@ -8,7 +8,10 @@ app = Flask(__name__)
 
 # Google Sheets Setup
 scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
-creds = ServiceAccountCredentials.from_json_keyfile_name("credentials.json", scope)
+import json
+creds_dict = json.loads(os.getenv("GOOGLE_CREDS_JSON"))
+creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope)
+
 client = gspread.authorize(creds)
 
 # Main Google Sheet name
@@ -127,8 +130,8 @@ form_html = f"""
     <label>Go Live Mgr</label>
     <input name="golive_mgr" required>
 
-    <label>Status</label>
-    <input name="Status" required>
+    <label>status</label>
+    <input name="status" required>
    
     <label>Dashboard Status</label>
     <input name="dashboard_status" required>
