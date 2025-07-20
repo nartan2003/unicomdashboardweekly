@@ -3,20 +3,17 @@ import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 from datetime import datetime
 import os
+import json
+from io import StringIO
 
 app = Flask(__name__)
 
 # Google Sheets Setup
-import json
-from oauth2client.service_account import ServiceAccountCredentials
-from io import StringIO
-
 scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
 creds_json = os.environ.get("GOOGLE_CREDS")
 creds_dict = json.loads(creds_json)
 creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope)
 client = gspread.authorize(creds)
-
 
 SHEET_NAME = "Weekly Client Dashboard"
 HEADERS = [
@@ -80,7 +77,7 @@ form_html = f"""
       border-radius: 10px;
       box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }}
-    input, textarea {{
+    input, textarea, select {{
       width: 100%;
       padding: 10px;
       margin-top: 8px;
@@ -132,8 +129,25 @@ form_html = f"""
     <label>Tenant Name</label><input name="tenant_name" required>
     <label>Tenant Code</label><input name="tenant_code" required>
     <label>Golive AM</label><input name="golive_am" required>
-    <label>Go Live Mgr</label><input name="golive_mgr" required>
-    <label>Status</label><input name="status" required>
+
+    <label>Go Live Mgr</label>
+    <select name="golive_mgr" required>
+      <option value="">-- Select Manager --</option>
+      <option>Shubham varshney</option>
+      <option>praneet singh</option>
+      <option>ifrah sabir</option>
+      <option>prakhar kesarwani</option>
+    </select>
+
+    <label>Status</label>
+    <select name="status" required>
+      <option value="">-- Select Status --</option>
+      <option>wip</option>
+      <option>uo</option>
+      <option>handover pending</option>
+      <option>on hold</option>
+    </select>
+
     <label>Dashboard Status</label><input name="dashboard_status" required>
     <label>Remarks</label><textarea name="remarks" rows="3"></textarea>
     <button type="submit"> Submit Update</button>
@@ -158,6 +172,8 @@ def dashboard():
         worksheet.append_row(data)
         return "✅ Data submitted successfully! <a href='/'>Go back</a>"
     return render_template_string(form_html)
+
+# Include your search, delete, view, and app run code here unchanged.
 
 # ----------------------------- Search -----------------------------
 @app.route("/search", methods=["GET", "POST"])
