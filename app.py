@@ -149,7 +149,14 @@ form_html = f"""
        <option>Live</option>
     </select>
 
-    <label>Dashboard Status</label><input name="dashboard_status" required>
+      <label>Dashboard Status</label>
+    <select name="status" required>
+      <option value="">-- Select Status --</option>
+      <option>DONE</option>
+      <option>NOT REQUIRED</option>
+      <option>PENDING</option>
+    </select>
+    
     <label>Remarks</label><textarea name="remarks" rows="3"></textarea>
     <button type="submit"> Submit Update</button>
   </form>
