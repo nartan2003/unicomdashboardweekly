@@ -144,8 +144,9 @@ form_html = f"""
       <option value="">-- Select Status --</option>
       <option>wip</option>
       <option>uo</option>
-      <option>handover pending</option>
-      <option>on hold</option>
+      <option>Handover Pending</option>
+      <option>On Hold</option>
+       <option>Live</option>
     </select>
 
     <label>Dashboard Status</label><input name="dashboard_status" required>
